@@ -1,7 +1,7 @@
 {
-  "name": "Kinder Jagter’s Vault",
+  "name": "Kinder Jagter’s Vault 2.0",
   "short_name": "KJ Vault",
-  "description": "A retro-inspired shared gaming knowledge archive.",
+  "description": "A retro-inspired gaming knowledge archive.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

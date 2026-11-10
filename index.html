@@ -22,24 +22,75 @@ nav{display:flex;gap:8px;overflow:auto;padding-bottom:8px;margin-bottom:16px}.ta
 .hidden{display:none!important}.empty{color:var(--muted);padding:22px;text-align:center;border:1px dashed var(--line);border-radius:12px}.footer{text-align:center;color:#837b9e;font-size:10px;line-height:1.7;margin-top:28px}
 dialog{background:#171529;color:white;border:1px solid #65518f;border-radius:16px;width:min(560px,calc(100% - 24px));padding:21px}dialog::backdrop{background:#05040bd9}.dhead{display:flex;justify-content:space-between;align-items:center;gap:10px}.dhead h3{font:11px/1.8 'Press Start 2P';margin:0}.close{background:none;border:0;color:white;font-size:24px}.list{color:#d5cfe5;font-size:13px;line-height:1.8;padding-left:20px}
 @media(max-width:600px){.shell{padding:15px 12px 40px}.brand h1{font-size:9px}.stats{gap:7px}.stat{padding:10px}.stat strong{font-size:18px}.heading{align-items:stretch;flex-direction:column}.search{width:100%}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}}
+
+/* Version 2 development additions: preserve original V0.1 styles and features */
+.dev-banner{border:1px solid #7755ab;background:#291b46;border-radius:12px;padding:11px 14px;margin:0 0 16px;color:#f4e9ff;font-size:12px;line-height:1.6}
+.v2-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.v2-card{background:linear-gradient(150deg,#201b38,#141321);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:9px}
+.v2-card h4{margin:0;font-size:17px}.v2-card p{margin:0;line-height:1.55;color:var(--muted);font-size:13px;flex:1}
+.v2-meta{font-size:10px;letter-spacing:.3px;color:var(--cyan);line-height:1.6}
+.v2-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.v2-state{color:#f9a8d4;font-size:11px;text-transform:uppercase;margin-right:auto}
+.v2-summary{background:#27203e;padding:12px;border-radius:10px;margin:12px 0;line-height:1.6}.v2-body{white-space:pre-wrap;line-height:1.75;font-size:14px;color:#e3dcf1}
+.v2-history,.v2-checkrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.v2-history span{font-size:12px}.v2-checkrow strong{display:block;font-size:13px}.v2-checkrow small{display:block;color:var(--muted);margin-top:5px}
+.v2-checkcols{display:flex;gap:11px;flex-wrap:wrap}.v2-checkcols label{display:flex;align-items:center;gap:3px;font-size:11px}.v2-checkcols input{accent-color:#a78bfa}
+.v2-note{font-size:12px;color:var(--muted);line-height:1.6}.v2-controls{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:12px}.v2-controls .search{flex:1;min-width:180px}
+.v2-controls select{background:#0e0d19;color:#fff;border:1px solid var(--line);border-radius:9px;padding:11px}
+#articleDialog{max-width:720px}#articleDialog h3{font-size:20px;margin:12px 0}#devNotice{color:#f9a8d4;font-size:12px;line-height:1.5}
+@media(max-width:650px){.v2-checkrow{display:block}.v2-checkcols{margin-top:10px;gap:18px}.v2-controls>*{width:100%}}
 </style></head>
 <body><div class="shell">
 <header><div class="brand"><div class="logo">▶</div><div><h1>KINDER JAGTER’S<br>VAULT</h1><small>PLAYER 1 + PLAYER 2 · EST. 2026</small></div></div><div><button class="btn" id="install" hidden>＋ Install</button> <button class="btn" id="backup">Export backup</button></div></header>
+<div class="dev-banner"><b>🧪 VERSION 2 DEVELOPMENT PREVIEW</b> — Your original features are retained. This copy is local-only: accounts, partner sync and cloud publishing are NOT connected. Do not upload to your live website.</div>
 <section class="hero"><div class="eyebrow">✦ YOUR PERSONAL GAMING DATABASE ✦</div><h2>READY PLAYER ONE?</h2><p>Your games, discoveries, secrets and strategies — saved in one place. Build your own knowledge vault, one adventure at a time.</p><div class="tag">INSERT COIN TO CONTINUE</div></section>
 <div class="stats"><div class="stat"><strong id="gc">4</strong><span>GAMES IN VAULT</span></div><div class="stat"><strong id="nc">0</strong><span>YOUR NOTES</span></div><div class="stat"><strong id="dc">0</strong><span>DISCOVERIES TICKED</span></div></div>
-<nav><button class="tab active" data-view="library">🎮 Game library</button><button class="tab" data-view="journal">📓 Journal</button><button class="tab" data-view="discoveries">✨ Discoveries</button><button class="tab" data-view="help">ℹ️ How it works</button></nav>
+<nav><button class="tab active" data-view="library">🎮 Game library</button><button class="tab" data-view="journal">📓 Journal</button><button class="tab" data-view="discoveries">✨ Discoveries</button><button class="tab" data-view="encyclopedia">📚 Encyclopaedia</button><button class="tab" data-view="editor">✏️ Vault editor</button><button class="tab" data-view="team">🤝 Team progress</button><button class="tab" data-view="devbackup">💾 Backup centre</button><button class="tab" data-view="help">ℹ️ How it works</button></nav>
 <main>
 <section id="library">
 <div class="heading"><h3>SELECT YOUR GAME</h3><input class="search" id="search" placeholder="Search games…"></div><div class="games" id="games"></div>
 <div class="panel" style="margin-top:14px"><h3>＋ ADD A GAME</h3><form id="addGame" class="formgrid"><div class="field"><label>GAME NAME</label><input id="gname" required placeholder="e.g. Stardew Valley"></div><div class="field"><label>PLATFORM</label><select id="gplatform"><option>Xbox</option><option>PC</option><option>Nintendo Switch</option><option>Mobile</option><option>Multiple</option></select></div><div class="field full"><label>DESCRIPTION</label><input id="gdesc" placeholder="A short description"></div><div class="field full"><button class="btn primary">Add to the vault</button></div></form></div></section>
 <section id="journal" class="hidden"><div class="heading"><h3>PLAYER JOURNAL</h3></div><div class="panel"><form id="addNote" class="formgrid"><div class="field"><label>GAME</label><select id="ngame"></select></div><div class="field"><label>NOTE TYPE</label><select id="ntype"><option>Tip / trick</option><option>Easter egg</option><option>Guide / walkthrough</option><option>Personal note</option><option>Question to investigate</option></select></div><div class="field full"><label>TITLE</label><input id="ntitle" required placeholder="e.g. Secret room location"></div><div class="field full"><label>NOTE</label><textarea id="nbody" required placeholder="Write down what you discovered…"></textarea></div><div class="field full"><button class="btn primary">Save note</button></div></form></div><div class="panel" style="margin-top:14px"><h3>SAVED NOTES</h3><div id="notes"></div></div></section>
 <section id="discoveries" class="hidden"><div class="heading"><h3>DISCOVERY CHECKLIST</h3></div><p class="hint">Starter research ideas. Tick them off as you investigate; save the details in your Journal.</p><div class="panel" id="checks"></div></section>
+
+<section id="encyclopedia" class="hidden">
+ <div class="heading"><h3>THE GAME ENCYCLOPAEDIA</h3><button id="newArticle" class="btn primary">＋ New article</button></div>
+ <p class="hint">Browse starter reference entries for all six game sections. The initial library is deliberately small; complete databases and sourced walkthroughs are planned for later build stages.</p>
+ <div class="v2-controls"><input class="search" id="articleSearch" placeholder="Search titles, topics, tags…" aria-label="Search articles"><select id="articleGame" aria-label="Filter by game"></select></div>
+ <p class="v2-note" id="articleCount"></p><div id="articleList" class="v2-grid"></div>
+</section>
+<section id="editor" class="hidden">
+ <div class="heading"><h3>VAULT ARTICLE EDITOR</h3></div>
+ <p class="hint">Create a draft, preview it, or publish it <b>locally in this development copy</b>. No account or online publishing is active yet.</p>
+ <div class="panel"><div class="v2-controls"><label for="template">Start from template:</label><select id="template"><option value="blank">Choose a template…</option><option value="pokemon">Pokémon / Pokédex</option><option value="minecraft">Minecraft mob</option><option value="zombies">Zombies quest</option><option value="siege">Siege operator</option><option value="ark">ARK essentials</option></select></div>
+ <p class="hint" id="editorStatus">New article</p>
+ <div class="formgrid">
+ <div class="field"><label for="edGame">GAME</label><select id="edGame"></select></div>
+ <div class="field"><label for="edCategory">CATEGORY</label><input id="edCategory" placeholder="e.g. Mobs"></div>
+ <div class="field full"><label for="edTitle">ARTICLE TITLE</label><input id="edTitle" placeholder="e.g. Enderman"></div>
+ <div class="field full"><label for="edSummary">QUICK SUMMARY</label><textarea id="edSummary" placeholder="One or two sentences…"></textarea></div>
+ <div class="field full"><label for="edBody">DETAILED INFORMATION</label><textarea id="edBody" style="min-height:200px" placeholder="Write your detailed guide…"></textarea></div>
+ <div class="field"><label for="edEdition">GAME / EDITION / VERSION</label><input id="edEdition" placeholder="e.g. Java & Bedrock"></div>
+ <div class="field"><label for="edTags">TAGS (COMMA SEPARATED)</label><input id="edTags" placeholder="e.g. survival, beginner"></div>
+ </div><div class="v2-controls" style="margin-top:14px"><button class="btn" id="previewArticle">Preview</button><button class="btn" id="saveDraft">Save draft</button><button class="btn primary" id="publishLocal">Publish locally</button><button class="btn" id="copyAIPrompt">Copy AI research prompt</button></div><p id="devNotice" role="status"></p></div>
+ <div class="panel" style="margin-top:14px"><h3>ARTICLE REVISION HISTORY</h3><p class="hint">Previous versions are saved when an existing article is edited. Restoring one saves the current version first.</p><div id="revisionList"></div></div>
+</section>
+<section id="team" class="hidden"><div class="heading"><h3>PERSONAL + SHARED CHECKLISTS</h3></div>
+ <p class="hint"><b>Local design prototype:</b> the three columns demonstrate individual and joint progress. They are NOT separate authenticated users, and changes do not sync to your boyfriend's phone.</p>
+ <div class="panel" id="v2Checks"></div>
+</section>
+<section id="devbackup" class="hidden"><div class="heading"><h3>BACKUP & RESTORE LAB</h3></div>
+ <div class="panel"><h3>EXPORT DEVELOPMENT DATA</h3><p class="hint">Download a JSON file containing a copy of the original V0.1 game library, notes and checklist keys, plus the new local development articles, revisions and checklist demo.</p><button class="btn primary" id="v2Export">Download combined backup</button></div>
+ <div class="panel" style="margin-top:14px"><h3>RESTORE DEVELOPMENT DATA</h3><p class="hint">Select a V2 development backup. Preview what it contains before replacing V2 data. This does NOT overwrite your original V0.1 local storage.</p><div class="field"><label for="v2Import">CHOOSE A V2 BACKUP FILE</label><input type="file" accept="application/json,.json" id="v2Import"></div><p id="importPreview" class="hint" role="status"></p><button class="btn" id="confirmImport" hidden>Confirm V2 restore</button></div>
+ <p class="hint">A real cloud migration, full database backup, account export and recovery test are separate work before launch. Never assume an original ZIP includes personal browser data.</p>
+</section>
 <section id="help" class="hidden"><div class="panel"><h3>HOW TO USE YOUR VAULT</h3><ol class="list"><li>Choose a game in the Game Library.</li><li>Open its archive for topic ideas and research prompts.</li><li>Use the Journal to save tips, Easter eggs, walkthroughs and questions.</li><li>Tick off research prompts in Discoveries.</li><li>Export a backup regularly.</li></ol><p class="hint"><b>Version 0.1 limitation:</b> this first version stores information only in this browser on this device. It does not yet sync between you and your boyfriend. Stage 3/4 can add a shared cloud database and separate logins. Do not enter passwords or sensitive information.</p></div></section>
 </main><div class="footer">KINDER JAGTER’S VAULT · PLAYER 1 + PLAYER 2<br>VERSION 0.1 · YOUR ADVENTURES, DOCUMENTED</div></div>
 <dialog id="modal"><div class="dhead"><h3 id="mtitle">GAME ARCHIVE</h3><button class="close" id="close">×</button></div><div id="mcontent"></div></dialog>
+<dialog id="articleDialog"><div class="dhead"><h3>ENCYCLOPAEDIA ENTRY</h3><button class="close" id="closeArticle" aria-label="Close article">×</button></div><div id="articleDetail"></div></dialog>
 <script>
 const seeds=[
 {id:"minecraft",name:"Minecraft",platform:"PC · Xbox · Switch · Mobile",emoji:"⛏️",desc:"A sandbox adventure about building, crafting, exploring and surviving.",topics:["Survival basics and first-night checklist","Crafting recipes, tools and enchantments","Villager trading and useful farms","Nether and End preparation","Redstone mechanisms and building ideas","Hidden structures, mobs and game secrets"],start:"Keep Java and Bedrock differences in mind when saving mechanics or seed information."},
+{id:"pokemon",name:"Pokémon",platform:"Nintendo Switch · Other Nintendo systems",emoji:"⚡",desc:"Mainline Pokédex, evolution guides, shiny hunting, battles and collection trackers.",topics:["National Pokédex and evolution methods","Game-specific locations and walkthroughs","Type matchups and battle strategies","Shiny hunting and breeding","Living Dex and personal collection tracking"],start:"Label information by Pokémon title and generation. Spin-offs can be added later."},
 {id:"cod",name:"Call of Duty: Zombies",platform:"Multiple Call of Duty titles",emoji:"🧟",desc:"A collection for Zombies modes across different Call of Duty games and maps.",topics:["Create a separate entry for each Call of Duty title and map","Perks and Pack-a-Punch locations","Wonder weapons and upgrade quests","Main Easter egg quest steps","Buildables, radios and hidden intel","High-round survival strategies"],start:"Always label the specific Call of Duty title, map and version. Easter egg steps and mechanics vary between games."},
 {id:"siege",name:"Tom Clancy’s Rainbow Six Siege",platform:"Xbox · PC · PlayStation",emoji:"🛡️",desc:"A tactical team shooter focused on operators, gadgets, maps and teamwork.",topics:["Attacking operator abilities","Defending operator abilities","Map callouts and site layouts","Reinforcements and rotation ideas","Drone and camera strategies","Weapon attachments and loadouts"],start:"Organise notes by operator and map, and date strategies that may change with updates."},
 {id:"ark-evolved",name:"ARK: Survival Evolved",platform:"Xbox · PC · PlayStation (varies)",emoji:"🦕",desc:"A survival adventure of taming creatures, crafting, building and exploring.",topics:["Creature taming methods and food","Crafting recipes and engrams","Base locations and building plans","Map resources and caves","Boss preparation","Breeding and creature stats"],start:"Keep notes specific to the map and game version."},
@@ -47,6 +98,7 @@ const seeds=[
 ];
 const ideas=[["Minecraft","Create a first-night survival checklist"],["Minecraft","Make a crafting and enchantment reference"],["Call of Duty: Zombies","Choose a favourite Zombies map to document"],["Call of Duty: Zombies","Record a wonder weapon quest"],["Rainbow Six Siege","Create a page for a favourite operator"],["Rainbow Six Siege","Start a map callout glossary"],["ARK: Survival Evolved","Document a creature tame"],["ARK: Survival Ascended","Make a starter base checklist"]];
 let games=JSON.parse(localStorage.getItem("kjv_games")||"null")||seeds,notes=JSON.parse(localStorage.getItem("kjv_notes")||"[]"),ticks=JSON.parse(localStorage.getItem("kjv_ticks")||"{}");
+if(!games.some(g=>g.id==="pokemon"))games.push(seeds.find(g=>g.id==="pokemon"));
 const $=id=>document.getElementById(id),safe=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 function save(){localStorage.setItem("kjv_games",JSON.stringify(games));localStorage.setItem("kjv_notes",JSON.stringify(notes));localStorage.setItem("kjv_ticks",JSON.stringify(ticks));stats()}
 function stats(){$("gc").textContent=games.length;$("nc").textContent=notes.length;$("dc").textContent=Object.values(ticks).filter(Boolean).length}
@@ -63,4 +115,45 @@ $("close").onclick=()=>$("modal").close();$("backup").onclick=()=>{let blob=new 
 let promptEvent;$("install").onclick=async()=>{if(promptEvent){promptEvent.prompt();await promptEvent.userChoice;promptEvent=null;$("install").hidden=true}};window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();promptEvent=e;$("install").hidden=false});
 if("serviceWorker"in navigator&&location.protocol.startsWith("http"))navigator.serviceWorker.register("./sw.js").catch(()=>{});
 stats();drawGames();drawNotes();drawChecks();
-</script></body></html>
+</script>
+<section class="panel" style="margin:14px">
+<h3>RESTORE ORIGINAL BACKUP</h3>
+<p class="hint">Choose your original Vault JSON backup. Check its contents before restoring. This replaces the original game library, notes and ticks on this website only.</p>
+<label for="originalBackupImport">Choose original backup</label>
+<input id="originalBackupImport" type="file" accept=".json,application/json">
+<p id="originalBackupPreview" role="status"></p>
+<button class="btn" id="originalBackupConfirm" hidden>Confirm original restore</button>
+</section>
+<script>
+(()=>{
+let pending=null;
+const file=document.getElementById('originalBackupImport');
+const preview=document.getElementById('originalBackupPreview');
+const button=document.getElementById('originalBackupConfirm');
+file.addEventListener('change',async()=>{
+ pending=null;button.hidden=true;
+ try{
+  const f=file.files[0];
+  if(!f)return;
+  if(f.size>4000000)throw Error('File too large');
+  const d=JSON.parse(await f.text());
+  if(!d||!Array.isArray(d.games)||!Array.isArray(d.notes)||
+     !d.ticks||typeof d.ticks!=='object'||Array.isArray(d.ticks))
+   throw Error('Not a valid original Vault backup');
+  pending=d;
+  preview.textContent=`Ready: ${d.games.length} games, ${d.notes.length} notes. Nothing has been replaced.`;
+  button.hidden=false;
+ }catch(e){preview.textContent=e.message;}
+});
+button.addEventListener('click',()=>{
+ if(!pending)return;
+ if(!confirm('Replace this website’s original games, notes and ticks with the selected backup?'))return;
+ localStorage.setItem('kjv_games',JSON.stringify(pending.games));
+ localStorage.setItem('kjv_notes',JSON.stringify(pending.notes));
+ localStorage.setItem('kjv_ticks',JSON.stringify(pending.ticks));
+ preview.textContent='Restore saved. Reload this page to view your data.';
+ pending=null;button.hidden=true;
+});
+})();
+</script>
+<script src="content.js"></script><script src="dev.js"></script></body></html>
